@@ -7,13 +7,13 @@ global_data = {}
 
 #Name of the display dorm
 dormName="Busch House"
-dfAllExtended = pd.DataFrame
+dfAllExtended = pd.DataFrame()
 
 @app.on_event("startup")
 async def startup_event():
-    print("hello")
     #Read complete dataset
-    dfAllExtended = pd.read_csv("Python\Dorm Buildings.csv")
+    dfAllExtended = pd.read_csv("Dorm Buildings.csv")
+    print(dfAllExtended)
 
 def Regression(dfDorm):
     #Run a simple linear regression for current hour
