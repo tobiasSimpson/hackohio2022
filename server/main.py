@@ -60,17 +60,17 @@ def Graph(dfDorm):
 
 @app.get("/nextWeek")
 async def next_week(n):
-    #Read complete dataset
+    # Read complete dataset
     dfAll = pd.read_csv("Dorm Buildings.csv")
 
-    #Create a datasubset for specific dorm
+    # Create a datasubset for specific dorm
     dormNameCols = dfAll.columns
     dfDorm = dfAll[["Series Name"]]
     for x in dormNameCols:
         if dormName in x:
             dfDorm = pd.concat([dfDorm,dfAll[[x]]], axis=1)
-    #Limit dataframe to past week
-    dfDormWeek = dfDorm.iloc[n-168:n]
+    # Limit dataframe to past week
+    dfDormWeek = dfDorm.iloc[int(n)-168:int(n)]
     return dfDormWeek.to_json()
 
 if __name__ == "__main__":
