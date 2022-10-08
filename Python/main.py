@@ -61,6 +61,3 @@ for x in dormNameCols:
 #Limit dataframe to past week
 n=len(dfDorm.index)
 dfDormWeek = dfDorm.iloc[n-168:n]
-
-
-print(Regression(dfDormWeek))
