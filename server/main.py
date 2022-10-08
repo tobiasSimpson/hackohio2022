@@ -7,10 +7,13 @@ global_data = {}
 
 #Name of the display dorm
 dormName="Busch House"
+dfAllExtended = pd.DataFrame
 
 @app.on_event("startup")
 async def startup_event():
     print("hello")
+    #Read complete dataset
+    dfAllExtended = pd.read_csv("Python\Dorm Buildings.csv")
 
 def Regression(dfDorm):
     #Run a simple linear regression for current hour
@@ -60,9 +63,7 @@ def Graph(dfDorm):
 
 @app.get("/nextWeek")
 async def next_week(n):
-    #Read complete dataset
-    dfAll = pd.read_csv("Dorm Buildings.csv")
-
+    dfAll = dfAllExtended.iloc[0:n]
     #Create a datasubset for specific dorm
     dormNameCols = dfAll.columns
     dfDorm = dfAll[["Series Name"]]
