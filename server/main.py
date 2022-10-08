@@ -12,10 +12,11 @@ dfAllExtended = pd.DataFrame()
 @app.on_event("startup")
 async def startup_event():
     #Read complete dataset
-    dfAllExtended = pd.read_csv("Dorm Buildings.csv")
-    print(dfAllExtended)
+    dfAllExtended = pd.read_csv('data\Dorm Buildings.csv')
 
-def Regression(dfDorm):
+@app.get("regression")
+async def Regression(csv):
+    dfDorm = pd.read_csv(csv)
     #Run a simple linear regression for current hour
     startIndx = [23,47,71,95,119,143,167]
     endIndx = [0,24,48,72,96,120,144]
@@ -52,16 +53,20 @@ def Regression(dfDorm):
                 if endAvg[i] - startAvg[i] > max2:
                     max2 = endAvg[i] - startAvg[i]
                     maxIndx2 = i
-    return [cols[maxIndx1], cols[maxIndx2]]
+    return [cols[maxIndx1], cols[maxIndx2]].to_json()
 
-def Leaderboard(dfAll,dfDorm):
+@app.get("learderboard")
+async def Leaderboard(dfAll,dfDorm):
 
     return 0
 
-def Graph(dfDorm):
-    return pd.concat([dfDorm[["Series Name"]],dfDorm[[dormName + " - Total Energy Consumption (Cleaned) (kBTU)"]]],axis=1)
+@app.get("graph")
+async def Graph(csv):
+    dfDorm = pd.read_csv(csv)
+    dfDorm = pd.concat([dfDorm[["Series Name"]],dfDorm[[dormName + " - Total Energy Consumption (Cleaned) (kBTU)"]]],axis=1)
+    return dfDorm.to_json()
 
-@app.get("/nextWeek")
+@app.get("nextWeek")
 async def next_week(n):
     dfAll = dfAllExtended.iloc[0:n]
     #Create a datasubset for specific dorm
