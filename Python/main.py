@@ -8,7 +8,7 @@ def Leaderboard(dfAll,dfDorm):
 
     return 0
 
-def Graph(dfDorm):
+def Graph(dfDorm,dormName):
     return pd.concat([dfDorm[["Series Name"]],dfDorm[[dormName + " - Total Energy Consumption (Cleaned) (kBTU)"]]],axis=1)
 
 #Name of the display dorm
