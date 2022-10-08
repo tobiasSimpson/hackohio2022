@@ -50,7 +50,7 @@ def Graph(dfDorm):
     return pd.concat([dfDorm[["Series Name"]],dfDorm[[dormName + " - Total Energy Consumption (Cleaned) (kBTU)"]]],axis=1)
 
 #Read complete dataset
-dfAll = pd.read_csv("Python\Dorm Buildings.csv")
+dfAll = pd.read_csv("Dorm Buildings.csv")
 
 #Create a datasubset for specific dorm
 dormNameCols = dfAll.columns
