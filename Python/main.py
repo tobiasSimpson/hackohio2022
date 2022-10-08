@@ -1,13 +1,15 @@
 import pandas as pd
 
-def regression(dfDorm):
+def Regression(dfDorm):
+
     return 0
 
-def leaderboard(dfAll,dfDorm):
+def Leaderboard(dfAll,dfDorm):
+
     return 0
 
-def graph(dfDorm):
-    return 0
+def Graph(dfDorm):
+    return pd.concat([dfDorm[["Series Name"]],dfDorm[[dormName + " - Total Energy Consumption (Cleaned) (kBTU)"]]],axis=1)
 
 #Name of the display dorm
 dormName="Busch House"
@@ -19,4 +21,8 @@ dormNameCols = dfAll.columns
 dfDorm = dfAll[["Series Name"]]
 for x in dormNameCols:
     if dormName in x:
-        dfDorm = pd.concat([dfDorm,dfAll[[x]]])
+        dfDorm = pd.concat([dfDorm,dfAll[[x]]], axis=1)
+print(dfDorm)
+#Limit dataframe to past week
+n=len(dfDorm.index)
+dfDormWeek = dfDorm.iloc[n-168:n]
