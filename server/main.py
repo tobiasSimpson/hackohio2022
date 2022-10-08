@@ -58,8 +58,8 @@ def Leaderboard(dfAll,dfDorm):
 def Graph(dfDorm):
     return pd.concat([dfDorm[["Series Name"]],dfDorm[[dormName + " - Total Energy Consumption (Cleaned) (kBTU)"]]],axis=1)
 
-@app.get("/nextHour")
-async def next_hour(n):
+@app.get("/nextWeek")
+async def next_week(n):
     #Read complete dataset
     dfAll = pd.read_csv("Dorm Buildings.csv")
 
